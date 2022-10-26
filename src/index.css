@@ -15,6 +15,15 @@
   -webkit-text-size-adjust: 100%;
 }
 
+html {
+  box-sizing: border-box;
+}
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
 a {
   font-weight: 500;
   color: #646cff;
@@ -26,6 +35,7 @@ a:hover {
 
 body {
   margin: 0;
+  padding: 0 1rem;
 }
 
 h1 {
@@ -68,7 +78,11 @@ button:focus-visible {
     color: #747bff;
   }
   button {
-    background-color: #f9f9f9;
+    background-color: #b8e069;
+    display: block;
+    margin-top: 3rem;
+    margin-inline: auto;
+    font-size: 1.75rem;
   }
 }
 
@@ -77,6 +91,7 @@ button:focus-visible {
   padding: 0 0.25em;
   position: relative;
   margin-right: 0.1em;
+  font-size: 1.25rem;
 }
 
 .words-active {
@@ -88,4 +103,50 @@ button:focus-visible {
 }
 .words-incorrect {
   color: red;
+}
+
+.container {
+  max-width: 800px;
+  margin-inline: auto;
+}
+.container input {
+  width: 100%;
+  font-size: 2rem;
+  border: 1px solid black;
+  border-radius: 5px;
+  padding: 0.5rem 1rem;
+  margin-bottom: 1rem;
+}
+
+.word-counter_container input:focus {
+  box-shadow: 0 0 10px #b8e069 inset;
+}
+
+.word-counter_stats {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.time-ending {
+  color: red;
+}
+
+.result-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+
+.result-container_item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.result-heading {
+  text-align: center;
 }

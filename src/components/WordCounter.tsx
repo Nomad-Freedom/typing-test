@@ -63,22 +63,24 @@ const WordCounter = ({ setResult }: Props) => {
     }
     if (!startCount) setStartCount(true);
 
-    if (activeWordIndex === words.length || time <= 0) {
-      setStartCount(false);
-      setTime(60);
+    if (activeWordIndex === words.length) {
+      resetGame();
     }
   }
 
   return (
-    <>
-      <Wpm correctWords={correctWords} />
-      <Timer start={startCount} />
+    <section className="container">
+      <div className="word-counter_stats">
+        <Wpm correctWords={correctWords} />
+        <Timer start={startCount} />
+      </div>
       <input
         type="text"
         name="word"
         id="word"
         ref={uInput}
         onKeyDown={handleSpace}
+        placeholder="Type the Words Here"
       />
       <div>
         {words.map((word, index) => {
@@ -95,7 +97,7 @@ const WordCounter = ({ setResult }: Props) => {
           );
         })}
       </div>
-    </>
+    </section>
   );
 };
 

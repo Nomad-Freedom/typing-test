@@ -20,7 +20,11 @@ const Timer = ({ start }: Props) => {
     };
   }, [start]);
 
-  return <div>Time left: {time}</div>;
+  return (
+    <div>
+      Time left: <span className={time <= 10 ? "time-ending" : ""}>{time}</span>
+    </div>
+  );
 };
 
 export default Timer;
