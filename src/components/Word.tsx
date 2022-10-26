@@ -4,10 +4,9 @@ type Props = {
 };
 
 const Word = ({ value, active }: Props) => {
-  if (active) {
-    return <span className="words words-active">{value} </span>;
-  }
-  return <span className="words">{value} </span>;
+  return (
+    <span className={!active ? "words" : "words words-active"}>{value} </span>
+  );
 };
 
 export default Word;

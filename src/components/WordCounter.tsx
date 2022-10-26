@@ -28,9 +28,8 @@ const WordCounter = () => {
       />
       <div>
         {words.map((word, index) => {
-          return (
-            <Word key={index} active={index === activeWordIndex} value={word} />
-          );
+          const isActive = index === activeWordIndex;
+          return <Word key={index} active={isActive} value={word} />;
         })}
       </div>
     </>
