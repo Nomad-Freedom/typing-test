@@ -1,3 +1,5 @@
+import React, { useEffect, useRef } from "react";
+
 type Props = {
   value: string;
   active: boolean;
@@ -16,4 +18,4 @@ const Word = ({ value, active, correct }: Props) => {
   );
 };
 
-export default Word;
+export default React.memo(Word);

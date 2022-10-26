@@ -1,9 +1,15 @@
-import { useState } from "react";
+import { useEffect, useRef } from "react";
 import useWords from "../hooks/useWords";
 import Word from "./Word";
 
 const WordCounter = () => {
-  const [userInput, setUserInput] = useState("");
+  // get reference to user input
+  const uInput = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    uInput.current?.focus();
+  }, []);
+
   const {
     words,
     activeWordIndex,
@@ -12,16 +18,13 @@ const WordCounter = () => {
     setCorrectWord,
   } = useWords();
 
-  function handleUserInput(event: React.ChangeEvent<HTMLInputElement>) {
-    setUserInput(event.target.value);
-  }
   function handleSpace(event: React.KeyboardEvent<HTMLInputElement>) {
     if (event.key === " ") {
       setActiveWordIndex((index) => index + 1);
-
-      setCorrectWord(userInput);
-
-      setUserInput("");
+      if (uInput.current?.value) {
+        setCorrectWord(uInput.current?.value);
+        uInput.current.value = " ";
+      }
     }
   }
 
@@ -31,8 +34,7 @@ const WordCounter = () => {
         type="text"
         name="word"
         id="word"
-        value={userInput}
-        onChange={handleUserInput}
+        ref={uInput}
         onKeyDown={handleSpace}
       />
       <div>
