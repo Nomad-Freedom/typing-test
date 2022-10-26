@@ -9,7 +9,11 @@ const useWords = () => {
   // correct words array
   const [correctWords, setCorrectWords] = useState<boolean[]>([]);
 
-  function setCorrectWord(userInput: string) {
+  function setCorrectWord(userInput?: string) {
+    if (!userInput) {
+      setCorrectWords([]);
+      return;
+    }
     // check if user input match word bank
     const isWordMatch = userInput.trim() === words[activeWordIndex];
     // update correct word array state
