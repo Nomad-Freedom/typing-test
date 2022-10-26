@@ -83,3 +83,9 @@ button:focus-visible {
   background-color: #b8e069;
   border-radius: 5px;
 }
+.words-correct {
+  color: green;
+}
+.words-incorrect {
+  color: red;
+}

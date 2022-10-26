@@ -1,11 +1,16 @@
 import { useState } from "react";
-import { shuffleArray, wordBank } from "../lib/wordBank";
+import useWords from "../hooks/useWords";
 import Word from "./Word";
 
 const WordCounter = () => {
-  const [words, setWords] = useState<string[]>(() => shuffleArray(wordBank));
   const [userInput, setUserInput] = useState("");
-  const [activeWordIndex, setActiveWordIndex] = useState(0);
+  const {
+    words,
+    activeWordIndex,
+    setActiveWordIndex,
+    correctWords,
+    setCorrectWord,
+  } = useWords();
 
   function handleUserInput(event: React.ChangeEvent<HTMLInputElement>) {
     setUserInput(event.target.value);
@@ -13,9 +18,13 @@ const WordCounter = () => {
   function handleSpace(event: React.KeyboardEvent<HTMLInputElement>) {
     if (event.key === " ") {
       setActiveWordIndex((index) => index + 1);
+
+      setCorrectWord(userInput);
+
       setUserInput("");
     }
   }
+
   return (
     <>
       <input
@@ -29,7 +38,16 @@ const WordCounter = () => {
       <div>
         {words.map((word, index) => {
           const isActive = index === activeWordIndex;
-          return <Word key={index} active={isActive} value={word} />;
+          const isCorrect = correctWords[index];
+
+          return (
+            <Word
+              key={index}
+              active={isActive}
+              value={word}
+              correct={isCorrect}
+            />
+          );
         })}
       </div>
     </>
