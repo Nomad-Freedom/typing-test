@@ -5,6 +5,7 @@ import WordCounter from "./components/WordCounter";
 export type Results = {
   wpm: number;
   correctWords: string;
+  accuracy: number;
 };
 function App() {
   const [result, setResult] = useState<Results>({} as Results);
@@ -14,7 +15,11 @@ function App() {
       <main className="container">
         <h1>Typing Speed Test</h1>
         <p>Thank you for playing the game this are your results</p>
-        <Result wpm={result.wpm} correctWords={result.correctWords} />
+        <Result
+          wpm={result.wpm}
+          correctWords={result.correctWords}
+          accuracy={result.accuracy}
+        />
         <button onClick={() => setResult({} as Results)}>Play Again</button>
       </main>
     );

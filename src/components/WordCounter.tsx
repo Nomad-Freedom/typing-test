@@ -47,10 +47,12 @@ const WordCounter = ({ setResult }: Props) => {
 
   function saveResults() {
     const wpm = getWordsPerMinute(time, correctWords);
-    const resultCorrectWords = `${
-      correctWords.filter((value) => value === true).length
-    } of ${correctWords.length} correct words `;
-    setResult({ wpm, correctWords: resultCorrectWords });
+    const successfulWords = correctWords.filter(
+      (value) => value === true
+    ).length;
+    const resultCorrectWords = `${successfulWords} of ${correctWords.length} correct words `;
+    const accuracy = successfulWords / correctWords.length;
+    setResult({ wpm, correctWords: resultCorrectWords, accuracy });
   }
 
   function handleSpace(event: React.KeyboardEvent<HTMLInputElement>) {
