@@ -20,12 +20,17 @@ const useWords = () => {
     setCorrectWords((correctWords) => [...correctWords, isWordMatch]);
   }
 
+  function resetWordBank() {
+    setWords(() => shuffleArray(wordBank));
+  }
+
   return {
     words,
     activeWordIndex,
     setActiveWordIndex,
     correctWords,
     setCorrectWord,
+    resetWordBank,
   };
 };
 

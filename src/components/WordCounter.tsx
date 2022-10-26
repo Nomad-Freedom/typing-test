@@ -5,8 +5,14 @@ import Timer from "./Timer";
 import Word from "./Word";
 import Wpm from "./Wpm";
 import { timeAtom } from "../store";
+import { Results } from "../App";
+import { getWordsPerMinute } from "../lib/wordStats";
 
-const WordCounter = () => {
+type Props = {
+  setResult: React.Dispatch<React.SetStateAction<Results>>;
+};
+
+const WordCounter = ({ setResult }: Props) => {
   // get reference to user input
   const uInput = useRef<HTMLInputElement>(null);
   const [startCount, setStartCount] = useState(false);
@@ -17,6 +23,7 @@ const WordCounter = () => {
     setActiveWordIndex,
     correctWords,
     setCorrectWord,
+    resetWordBank,
   } = useWords();
 
   useEffect(() => {
@@ -30,10 +37,20 @@ const WordCounter = () => {
   }, [time]);
 
   function resetGame() {
+    saveResults();
     setStartCount(false);
     setTime(60);
     setActiveWordIndex(0);
     setCorrectWord();
+    resetWordBank();
+  }
+
+  function saveResults() {
+    const wpm = getWordsPerMinute(time, correctWords);
+    const resultCorrectWords = `${
+      correctWords.filter((value) => value === true).length
+    } of ${correctWords.length} correct words `;
+    setResult({ wpm, correctWords: resultCorrectWords });
   }
 
   function handleSpace(event: React.KeyboardEvent<HTMLInputElement>) {
