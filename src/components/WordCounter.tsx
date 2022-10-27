@@ -57,10 +57,16 @@ const WordCounter = ({ setResult }: Props) => {
 
   function handleSpace(event: React.KeyboardEvent<HTMLInputElement>) {
     if (event.key === " ") {
+      if (uInput.current?.value === "") {
+        uInput.current.value = "";
+        return;
+      }
+
       setActiveWordIndex((index) => index + 1);
+
       if (uInput.current?.value) {
         setCorrectWord(uInput.current?.value);
-        uInput.current.value = " ";
+        uInput.current.value = "";
       }
     }
     if (!startCount) setStartCount(true);

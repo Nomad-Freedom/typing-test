@@ -3,5 +3,5 @@ export function getWordsPerMinute(timeElapse: number, correctWords: boolean[]) {
   const newCorrectWords = correctWords.filter((value) => value === true).length;
 
   const minutes = (60 - timeElapse) / 60;
-  return newCorrectWords / minutes;
+  return parseInt((newCorrectWords / minutes).toFixed(0));
 }

@@ -8,7 +8,7 @@ type Props = {
 const Wpm = ({ correctWords }: Props) => {
   const timeElapse = useAtomValue(timeAtom);
   const speed = getWordsPerMinute(timeElapse, correctWords);
-  const content = !!speed ? speed?.toFixed(0) : "?";
+  const content = !!speed ? speed : "?";
   return <div>WPM: {content}</div>;
 };
 
